@@ -24,4 +24,4 @@ function mapStateToProps ({authedUser}) {
     loading: authedUser === null,
   }
 }
-export default connect()(App)
+export default connect(mapStateToProps)(App)
