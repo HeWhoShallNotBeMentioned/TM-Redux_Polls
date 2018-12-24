@@ -21,10 +21,8 @@ function addPoll (poll) {
 export function handleAddPoll (poll) {
   return async (dispatch, getState) => {
     const { authedUser } = getState()
-    console.log("authedUser ----------------------------  ", authedUser )
     dispatch(showLoading());
      const  doggo = await savePoll({...poll, author: authedUser});
-     //console.log("savePoll================  ", doggo)
     dispatch(addPoll(doggo));
     dispatch(hideLoading());
   }

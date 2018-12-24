@@ -17,7 +17,7 @@ class App extends Component {
       <div>
       {this.props.loading === true
       ? <LoadingBar style={{ backgroundColor: 'RoyalBlue', height: '30px' }} updateTime={100} maxProgress={95} progressIncrease={30} />
-      : <Poll match={{params: {id: 'loxhs1bqm25b708cmbf3g'}}} />}
+      : <Poll match={{params: {id: 'xj352vofupe1dqz9emx13r'}}} />}
         
       </div>
     )
