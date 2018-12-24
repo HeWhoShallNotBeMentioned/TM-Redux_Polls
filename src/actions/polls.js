@@ -1,4 +1,8 @@
+
+import {savePoll} from '../utils/api';
+import { showLoading, hideLoading } from 'react-redux-loading';
 export const RECEIVE_POLLS = 'RECEIVE_POLLS'
+export const ADD_POLL = 'ADD_POLL'
 
 export function receivePolls (polls) {
   return {
@@ -6,3 +10,23 @@ export function receivePolls (polls) {
     polls: polls,
   }
 }
+
+function addPoll (poll) {
+  return {
+    type: ADD_POLL,
+    poll: poll,
+  }
+}
+
+export function handleAddPoll (poll) {
+  return async (dispatch, getState) => {
+    const { authedUser } = getState()
+    console.log("authedUser ----------------------------  ", authedUser )
+    dispatch(showLoading());
+     const  doggo = await savePoll({...poll, author: authedUser});
+     //console.log("savePoll================  ", doggo)
+    dispatch(addPoll(doggo));
+    dispatch(hideLoading());
+  }
+}
+
