@@ -4,6 +4,7 @@ import { handleInitialData } from '../actions/shared';
 import Dashboard from './Dashboard';
 import LoadingBar from 'react-redux-loading';
 import Leaderboard from './Leaderboard';
+import AddPoll from './AddPoll';
 
 class App extends Component {
   componentDidMount () {
@@ -15,7 +16,7 @@ class App extends Component {
       <div>
       {this.props.loading === true
       ? <LoadingBar style={{ backgroundColor: 'RoyalBlue', height: '30px' }} updateTime={100} maxProgress={95} progressIncrease={30} />
-      : <Leaderboard />}
+      : <AddPoll />}
         
       </div>
     )
