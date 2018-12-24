@@ -1,13 +1,59 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { getPercentage } from '../utils/helpers';
+
+ const getVoteKeys = () => ['aVotes', 'bVotes', 'cVotes', 'dVotes']
 
 class Poll extends React.Component {
+  handleAnswer = (answer) => {
+     const { poll, authedUser } = this.props
+     this.answered = true
+ 
+      console.log('Add Answer:', answer)
+   }
 
 render() {
+
+  if (this.props.poll === null) {
+       return <p>This poll does not exist</p>;
+     }
+
+     const { poll, vote, authorAvatar } = this.props;
+
+     const totalVotes = getVoteKeys()
+       .reduce((total, key) => total + poll[key].length, 0);
+
      return (
        <div className='poll-container'>
-       Poll Component
-          {JSON.stringify(this.props)} 
+  
+          <h1 className='question'>
+           {poll.question}
+         </h1>
+         <div className='poll-author'>
+           By <img src={authorAvatar} alt="Author's avatar" />
+         </div>
+         <ul>
+           {['aText', 'bText', 'cText', 'dText'].map((key) => {
+             const count = poll[key[0] + 'Votes'].length
+              return (
+              <li key={key}
+                onClick={() => {
+                  if (vote === null && !this.answered) {
+                    this.handleAnswer(key[0])
+                  }}}
+              className={`option ${vote === key[0] ? "chosen": ""}`}>
+                {vote === null 
+                 ? poll[key]
+                : <div className='result'>
+                         <span>{poll[key]}</span>
+                         <span>{getPercentage(count, totalVotes)}% ({count})</span>
+                       </div>
+                }
+              </li>
+
+              )
+           })}
+          </ul>
        </div>
      )
    }
